@@ -1,0 +1,18 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-image: url('./wallpaper.jpg');
+	display: flex;
+	flex-direction: column;
+	font-family: 'Montserrat', sans-serif;
+	height: 100vh;
+	margin: 50px;
+}
+
+h1 {
+	font-weight: bold;
+	margin: 0;
+}
+

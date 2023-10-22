@@ -8,11 +8,10 @@
 body {
 	background-image: url('./wallpaper.jpg');
 	display: flex;
-	justify-content: center;
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
 	height: 100vh;
-	margin: -20px 0 50px;
+	margin: 50px;
 }
 
 h1 {
