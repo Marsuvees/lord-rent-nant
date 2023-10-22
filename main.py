@@ -8,7 +8,7 @@ def home():
 
 @app.route('/login_signup')
 def login_signup():
-    return render_template('/Login_Signup.html')
+    return render_template('/Sign in.html')
 
 @app.route('/login', methods=['POST'])
 def login():

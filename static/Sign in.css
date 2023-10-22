@@ -9,7 +9,6 @@ body {
 	background-image: url('./wallpaper.jpg');
 	display: flex;
 	justify-content: center;
-	align-items: center;
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
 	height: 100vh;
