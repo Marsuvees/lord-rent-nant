@@ -3,7 +3,7 @@
     
     <head>
         <title>
-            Sign Up
+          {%block title%}{%endblock%}
         </title>
         
         <meta charset="UTF-8" />
@@ -11,10 +11,10 @@
         <link rel="stylesheet" href="./static/Login_Signup.css">
     </head>
     <body>
-        <div class="container" id="container">
-            {%block main %}{%endblock%}
-        </div>
         
+            {%block main_Signup%}{%endblock%}
+
+        {%block main_Homepage%}{%endblock%}
     </body>
     <script src="./static/swapping.js"></script>
 </html>
