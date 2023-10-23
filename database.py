@@ -40,7 +40,6 @@ class Tenants(Base):
     landlord_id = Column(Integer, ForeignKey('landlords.id'))
     landlord = relationship(Users, backref='tenants')
     paid_rent = Column(Boolean, default = False)
-    rent_expiry_date = Column(Date, default = None)
 
     # Define method to change paid rent status
     def change_paid_rent_status(self):
@@ -50,10 +49,7 @@ class Tenants(Base):
             self.paid_rent = False
         return self.paid_rent
 
-    # Define method to assign new rent expiry date
-    def assign_new_expiry_date(self, rent_period):
-        self.rent_expiry_date = datetime.today() + relativedelta(months=rent_period)
-        return self.rent_expiry_date        
+            
 
 
 # Define the House table
@@ -68,6 +64,13 @@ class Property(Base):
     landlord = relationship(Users, backref='properties')
     current_occupant_id = Column(Integer, ForeignKey('tenants.id'), nullable=True)
     tenant = relationship(Tenants, backref='properties')
+    rent_expiry_date = Column(Date, default = None)
+
+    # Define method to assign new rent expiry date
+    def assign_new_expiry_date(self, rent_period):
+        self.rent_expiry_date = datetime.today() + relativedelta(months=rent_period)
+        return self.rent_expiry_date
+
 
 if __name__ == '__main__': 
     # Create the tables in the database
