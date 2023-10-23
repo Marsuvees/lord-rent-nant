@@ -1,3 +1,13 @@
+
+@font-face {
+    font-family: 'zaslineregular';
+    src: url('zasline-webfont.woff2') format('woff2'),
+         url('zasline-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -13,9 +23,11 @@ body {
 
 h1 {
 	font-weight: bold;
-	margin: 0;
+	margin: 12px;
 }
 
 table{
+
     border-radius:10px;
+    background-color: whitesmoke;
 }
