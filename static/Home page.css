@@ -22,7 +22,8 @@ body {
 }
 
 h1 {
-	font-weight: bold;
+    font-family: 'zaslineregular';
+	font-weight: 600;
 	margin: 12px;
 }
 
