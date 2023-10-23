@@ -7,12 +7,15 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 # Create a SQLAlchemy engine and session
-username = "marsuvees"
-password = parse.quote(os.environ.get('MARSUVEES_PSQL_PASS'))
-host = "localhost"
-port = 5432
-database = "rent_reminder_system"
-engine = create_engine(f'postgresql://{username}:{password}@{host}:{port}/{database}')  # Use your desired database connection URL
+try:
+    username = "marsuvees"
+    password = parse.quote(os.environ.get('MARSUVEES_PSQL_PASS'))
+    host = "localhost"
+    port = 5432
+    database = "rent_reminder_system"
+    engine = create_engine(f'postgresql://{username}:{password}@{host}:{port}/{database}')  # Use your desired database connection URL
+except:
+    engine = create_engine('sqlite:///rent_reminder_system.db')
 Session = sessionmaker(bind=engine)
 session = Session()
 
@@ -63,15 +66,19 @@ class Property(Base):
     date_leased = Column(Date, default = None)
     landlord_id = Column(Integer, ForeignKey('landlords.id'))
     landlord = relationship(Users, backref='properties')
-    current_occupant_id = Column(Integer, ForeignKey('tenants.id'))
+    current_occupant_id = Column(Integer, ForeignKey('tenants.id'), nullable=True)
     tenant = relationship(Tenants, backref='properties')
 
 if __name__ == '__main__': 
     # Create the tables in the database
     Base.metadata.create_all(engine)
 
+    # Create admin password hasher
+    from bcrypt import hashpw, gensalt
+    salt = gensalt()
+
     # Enter admin data into the database
-    admin = Users(name="admin", email="tolujed@gmail.com", password="random_shit")
+    admin = Users(name="admin", email="tolujed@gmail.com", password=hashpw("random_shit".encode('utf-8'), salt).decode('utf-8'))
     test_tenant = Tenants(full_name="James Jed", email="tolujed@gmail.com", phone_number="1234567890")
     test_house = Property(address="12345 Test Street", landlord_id=1, current_occupant_id=1, date_leased=datetime.today(),  rent = 100000)
     session.add_all([admin, test_tenant, test_house,])
