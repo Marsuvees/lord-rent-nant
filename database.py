@@ -15,6 +15,7 @@ try:
     database = "rent_reminder_system"
     engine = create_engine(f'postgresql://{username}:{password}@{host}:{port}/{database}')  # Use your desired database connection URL
 except:
+    print('Dropping to SQLite')
     engine = create_engine('sqlite:///rent_reminder_system.db')
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -83,7 +84,7 @@ if __name__ == '__main__':
     # Enter admin data into the database
     admin = Users(name="admin", email="tolujed@gmail.com", password=hashpw("random_shit".encode('utf-8'), salt).decode('utf-8'))
     test_tenant = Tenants(full_name="James Jed", email="tolujed@gmail.com", phone_number="1234567890")
-    test_house = Property(address="12345 Test Street", landlord_id=1, current_occupant_id=1, date_leased=datetime.today(),  rent = 100000)
+    test_house = Property(description='2 bedrooms \n4 kitchens \n3 balconies',address="12345 Test Street", landlord_id=1, current_occupant_id=1, date_leased=datetime.today(),  rent = 100000)
     session.add_all([admin, test_tenant, test_house,])
     # update_query = session.query(Houses).filter(Houses.id == 1).first()
     # update_query.tenant_id = None
