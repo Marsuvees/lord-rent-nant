@@ -38,7 +38,7 @@ auth_bp = Blueprint("auth", __name__)
 
 @auth_bp.route("/accounts", methods=["POST", "GET"])
 def accounts():
-    return render_template("Sign In.html")
+    return render_template("Sign in.html")
 
 
 @auth_bp.route("/process_form", methods=["POST"])
