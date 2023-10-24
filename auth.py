@@ -75,4 +75,11 @@ def process_form():
 
 
 if __name__ == "__main__":
-    pass
+    new_user = Users(name='Jeremiah Chibueze', email='kiingjay77@gmail.com', password=hashpw('<PASSWORD>'.encode('utf-8'), salt).decode('utf-8'))
+    sess.add(new_user)
+    sess.commit()
+
+
+
+
+
