@@ -38,7 +38,7 @@ class Tenants(Base):
     full_name = Column(String, nullable=False)
     email = Column(String, nullable=False, unique=True)
     phone_number = Column(String, nullable=False)
-    landlord_id = Column(Integer, ForeignKey('landlords.id'))
+    landlord_id = Column(Integer, ForeignKey('landlords.id'), nullable=False)
     landlord = relationship(Users, backref='tenants')
     paid_rent = Column(Boolean, default = False)
 
@@ -60,18 +60,38 @@ class Property(Base):
     address = Column(String, nullable=False)
     description = Column(String, default = None)
     rent = Column(Integer, default = None, nullable=False)
-    date_leased = Column(Date, default = None)
+    date_leased = Column(Date, nullable=True)
     landlord_id = Column(Integer, ForeignKey('landlords.id'))
     landlord = relationship(Users, backref='properties')
+    status = Column(Boolean, default = False)
     current_occupant_id = Column(Integer, ForeignKey('tenants.id'), nullable=True)
+    rent_expiry_date = Column(Date, nullable=True, default=None)
     tenant = relationship(Tenants, backref='properties')
-    rent_expiry_date = Column(Date, default = None)
+
+    # Define method to assign new tenant
+    def assign_tenant(self, tenant_id):
+        if self.current_occupant_id == None:
+            self.current_occupant_id = tenant_id
+            self.status = True
+        else:
+            self.current_occupant_id = None
+            self.status = False
+
+    # Define method to change status
+    def change_status(self):
+        if self.current_occupant_id == None:
+            self.status = False
+        else:
+            self.status = True
 
     # Define method to assign new rent expiry date
-    def assign_new_expiry_date(self, rent_period):
-        self.rent_expiry_date = datetime.today() + relativedelta(months=rent_period)
-        return self.rent_expiry_date
-
+    def assign_lease_date(self, rent_period):
+        if self.date_leased == None:
+            self.rent_expiry_date = None
+            return 'Lease and rent dates not set'
+        else:
+            self.rent_expiry_date = self.date_leased + relativedelta(months=rent_period)
+            return 'Lease and rent dates set'
 
 if __name__ == '__main__': 
     # Create the tables in the database
@@ -83,8 +103,10 @@ if __name__ == '__main__':
 
     # Enter admin data into the database
     admin = Users(name="admin", email="tolujed@gmail.com", password=hashpw("random_shit".encode('utf-8'), salt).decode('utf-8'))
-    test_tenant = Tenants(full_name="James Jed", email="tolujed@gmail.com", phone_number="1234567890")
-    test_house = Property(description='2 bedrooms \n4 kitchens \n3 balconies',address="12345 Test Street", landlord_id=1, current_occupant_id=1, date_leased=datetime.today(),  rent = 100000)
+    test_tenant = Tenants(full_name="James Jed", email="tolujed@gmail.com", phone_number="1234567890", landlord_id=1)
+    test_house = Property(description='2 bedrooms \n4 kitchens \n3 balconies',address="12345 Test Street", landlord_id=1, rent = 100000, current_occupant_id=1)
+    test_house.assign_lease_date(6)
+    test_house.change_status()
     session.add_all([admin, test_tenant, test_house,])
     # update_query = session.query(Houses).filter(Houses.id == 1).first()
     # update_query.tenant_id = None
