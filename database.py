@@ -85,7 +85,7 @@ class Property(Base):
             self.status = True
 
     # Define method to assign new rent expiry date
-    def assign_lease_date(self, rent_period):
+    def assign_expiry_date(self, rent_period):
         if self.date_leased == None:
             self.rent_expiry_date = None
             return 'Lease and rent dates not set'
@@ -105,7 +105,7 @@ if __name__ == '__main__':
     admin = Users(name="admin", email="tolujed@gmail.com", password=hashpw("random_shit".encode('utf-8'), salt).decode('utf-8'))
     test_tenant = Tenants(full_name="James Jed", email="tolujed@gmail.com", phone_number="1234567890", landlord_id=1)
     test_house = Property(description='2 bedrooms \n4 kitchens \n3 balconies',address="12345 Test Street", landlord_id=1, rent = 100000, current_occupant_id=1)
-    test_house.assign_lease_date(6)
+    test_house.assign_expiry_date(6)
     test_house.change_status()
     session.add_all([admin, test_tenant, test_house,])
     # update_query = session.query(Houses).filter(Houses.id == 1).first()

@@ -75,10 +75,14 @@ def process_form():
 
 
 if __name__ == "__main__":
-    new_user = Users(name='Jeremiah Chibueze', email='kiingjay77@gmail.com', password=hashpw('<PASSWORD>'.encode('utf-8'), salt).decode('utf-8'))
-    sess.add(new_user)
-    sess.commit()
-
+    user_index = sess.query(Users).filter_by(email = 'kiingjay77@gmail.com').first()
+    if user_index:
+        print('user exists')
+    else:
+        new_user = Users(name='Jeremiah Chibueze', email='kiingjay77@gmail.com', password=hashpw('987654321'.encode('utf-8'), salt).decode('utf-8'))
+        sess.add(new_user)
+        sess.commit()
+        print('user created')
 
 
 
