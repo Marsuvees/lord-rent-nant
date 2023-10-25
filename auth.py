@@ -10,6 +10,7 @@ from flask import (
 )
 from database import session as sess, Users
 from bcrypt import checkpw, gensalt, hashpw
+import functools
 
 salt = gensalt()
 auth_bp = Blueprint("auth", __name__)
@@ -44,6 +45,7 @@ def accounts():
 @auth_bp.route("/process_form", methods=["POST"])
 def process_form():
     if request.method == "POST":
+        error = None
         if request.form["submit"] == "sign_in":
             email = request.form["email"]
             password = request.form["password"]
@@ -52,10 +54,15 @@ def process_form():
                 password.encode("utf-8"), user.password.encode("utf-8")
             ):
                 session["user_id"] = user.id
+                error = None
                 return redirect(url_for("main.home"))
             else:
                 print("wrong email or password")
                 return render_template("Sign in.html")
+            if error is not None:
+                session.clear()
+                session['user_id'] = user.id
+                return redirect(url_for("auth.sign_in"))
         elif request.form["submit"] == "sign_up":
             name = request.form["new_name"]
             email = request.form["new_email"]
@@ -71,7 +78,27 @@ def process_form():
                 sess.add(new_user)
                 sess.commit()
                 return redirect(url_for("accounts"))
+            
     return redirect(url_for("accounts"))
+
+@auth_bp.before_app_request
+def load_logged_in_user():
+    user_id = session.get('user_id')
+    print(user_id)
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = sess.query(Users).filter_by(id=user_id).one()
+
+
+def login_required(page):
+    @functools.wraps(page)
+    def wrapper(**kwargs):
+        if g.user is None:
+            return redirect(url_for("auth.sign_in"))
+        return page(**kwargs)
+    return wrapper
+
 
 
 if __name__ == "__main__":
