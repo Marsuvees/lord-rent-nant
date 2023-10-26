@@ -45,8 +45,8 @@ def accounts():
 @auth_bp.route("/process_form", methods=["POST"])
 def process_form():
     if request.method == "POST":
-        error = None
-        if request.form["submit"] == "sign_in":
+        if request.form.get("submit") == "sign_in":
+            error = None
             email = request.form["email"]
             password = request.form["password"]
             user = sess.query(Users).filter_by(email=email).first()
@@ -57,17 +57,18 @@ def process_form():
                 error = None
                 return redirect(url_for("main.home"))
             else:
+                error = "Invalid email or password"
                 print("wrong email or password")
                 return render_template("Sign in.html")
             if error is not None:
                 session.clear()
                 session['user_id'] = user.id
                 return redirect(url_for("auth.sign_in"))
-        elif request.form["submit"] == "sign_up":
-            name = request.form["new_name"]
-            email = request.form["new_email"]
+        elif request.form.get("submit") == "create_account":
+            name = request.form["name"]
+            email = request.form["email"]
             password = hashpw(
-                request.form["new_password"].encode("utf-8"), salt
+                request.form["password"].encode("utf-8"), salt
             ).decode("utf-8")
             user = sess.query(Users).filter_by(email=email).first()
             if user:
@@ -77,6 +78,7 @@ def process_form():
                 new_user = Users(name=name, email=email, password=password)
                 sess.add(new_user)
                 sess.commit()
+                print("New user added")
                 return redirect(url_for("accounts"))
             
     return redirect(url_for("accounts"))
