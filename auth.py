@@ -24,7 +24,8 @@ def accounts():
 @auth_bp.route("/sign_up", methods=["POST","GET"])
 def sign_up():
     if request.method == "POST":
-        name = request.form["username"]
+        first_name = request.form["fname"]
+        surnname = request.form["sname"]
         email = request.form["email"] 
         password = request.form["password"]
         hashed_pass = hashpw(str(password).encode("utf-8"), salt).decode("utf-8")
@@ -33,7 +34,7 @@ def sign_up():
             print(user.name)
             return render_template("Sign in.html")
         else:
-            new_user = Users(name=name, email=email, password=hashed_pass)
+            new_user = Users(name=f"{first_name} {surnname}", email=email, password=hashed_pass)
             sess.add(new_user)
             sess.commit()
             return render_template("Sign in.html")
@@ -45,7 +46,7 @@ def sign_in():
         email = request.form["email"]
         password = request.form["password"]
         error = None
-        user = sess.query(Users).filter_by(emai=email).first()
+        user = sess.query(Users).filter_by(email = email).first()
         hashed_pass = str(user.password)
         if user == None:
             error = "No user with this email exists."
@@ -56,7 +57,7 @@ def sign_in():
         if error is None:
             session.clear()
             session["user_id"] = user.id 
-            return redirect(url_for("main.home"))  
+            return redirect(url_for("home"))  
     return redirect(url_for("accounts"))
 
 
