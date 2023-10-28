@@ -7,14 +7,6 @@ app.secret_key = "DEV"
 def home():	
     return render_template('Home page.html')
 
-# @app.route('/login_signup')
-# def login_signup():
-#     return render_template('/Sign in.html')
-
-# @app.route('/login', methods=['POST'])
-# def login():
-#     pass
-
 from auth import auth_bp
 app.register_blueprint(auth_bp)
 
