@@ -50,15 +50,21 @@ def sign_in():
         hashed_pass = str(user.password)
         if user == None:
             error = "No user with this email exists."
-            return redirect(url_for("sign_in"))
+            return redirect(url_for("auth.accounts"))
         elif not checkpw(password.encode("utf-8"), hashed_pass.encode("utf-8")):
             error = "Incorrect password provided."
-            return redirect(url_for("sign_in"))
+            return redirect(url_for("auth.accounts"))
         if error is None:
             session.clear()
             session["user_id"] = user.id 
             return redirect(url_for("home"))  
     return redirect(url_for("accounts"))
+
+
+@auth_bp.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('auth.accounts'))
 
 
 @auth_bp.before_app_request
@@ -75,7 +81,7 @@ def login_required(page):
     @functools.wraps(page)
     def wrapper(**kwargs):
         if g.user is None:
-            return redirect(url_for("auth.sign_in"))
+            return redirect(url_for("auth.accounts"))
         return page(**kwargs)
     return wrapper
 
