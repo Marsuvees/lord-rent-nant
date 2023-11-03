@@ -2,14 +2,22 @@
 <html lang="en-UK">
     
     <head>
+        <meta charset="UTF-8" />
+
+        {%block Homepage_meta%}{%endblock%}
+
         <title>
         {%block title%}{%endblock%}
-        </title>
         
-        <meta charset="UTF-8" />
-        {%block homepag_css%}{# Link to homepage stylesheet #}{%endblock%}
+        </title>
+       
+        {%block homepage_css%}{# Link to homepage stylesheet #}{%endblock%}
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         {%block signin_css%}{%endblock%}
+
+     
+       
     </head>
     <body>
         
