@@ -16,72 +16,56 @@ salt = gensalt()
 auth_bp = Blueprint("auth", __name__)
 
 
-# @auth_bp.route("/create_account", methods=["GET", "POST"])
-# def create_account():
-#     if request.method == "POST":
-#         name = request.form["Name"]
-#         email = request.form["Em@il"]
-#         password = request.form["Pass_word"]
-#         user = sess.query(Users).filter_by(email=email).first()
-#         if user:
-#             flash("Email already exists")
-#         else:
-#             new_user = Users(
-#                 name=name,
-#                 email=email,
-#                 password=hashpw(password.encode("utf-8"), salt).decode("utf-8"),
-#             )
-#             sess.add(new_user)
-#             sess.commit()
-#             return redirect(url_for("auth.sign_in"))
-#     return render_template("Sign in.html")
-
-
 @auth_bp.route("/accounts", methods=["POST", "GET"])
 def accounts():
     return render_template("Sign in.html")
 
 
-@auth_bp.route("/process_form", methods=["POST"])
-def process_form():
+@auth_bp.route("/sign_up", methods=["POST","GET"])
+def sign_up():
     if request.method == "POST":
-        if request.form.get("submit") == "sign_in":
-            error = None
-            email = request.form["email"]
-            password = request.form["password"]
-            user = sess.query(Users).filter_by(email=email).first()
-            if user and checkpw(
-                password.encode("utf-8"), user.password.encode("utf-8")
-            ):
-                session["user_id"] = user.id
-                error = None
-                return redirect(url_for("main.home"))
-            else:
-                error = "Invalid email or password"
-                print("wrong email or password")
-                return render_template("Sign in.html")
-            if error is not None:
-                session.clear()
-                session['user_id'] = user.id
-                return redirect(url_for("auth.sign_in"))
-        elif request.form.get("submit") == "create_account":
-            name = request.form["name"]
-            email = request.form["email"]
-            password = hashpw(
-                request.form["password"].encode("utf-8"), salt
-            ).decode("utf-8")
-            user = sess.query(Users).filter_by(email=email).first()
-            if user:
-                print("Email already exists")
-                flash("Email already exists")
-            else:
-                new_user = Users(name=name, email=email, password=password)
-                sess.add(new_user)
-                sess.commit()
-                print("New user added")
-                return redirect(url_for("accounts"))
-            
+        first_name = request.form["fname"]
+        surnname = request.form["sname"]
+        email = request.form["email"] 
+        password = request.form["password"]
+        hashed_pass = hashpw(str(password).encode("utf-8"), salt).decode("utf-8")
+        user = sess.query(Users).filter_by(email=email).first()
+        if user:
+            print(user.name)
+            return render_template("Sign in.html")
+        else:
+            new_user = Users(name=f"{first_name} {surnname}", email=email, password=hashed_pass)
+            sess.add(new_user)
+            sess.commit()
+            return render_template("Sign in.html")
+    return render_template("Sign in.html")
+
+@auth_bp.route("/sign_in", methods=["POST", "GET"])
+def sign_in():
+    if request.method == "POST":
+        email = request.form["email"]
+        password = request.form["password"]
+        error = None
+        user = sess.query(Users).filter_by(email = email).first()
+        hashed_pass = str(user.password)
+        if user == None:
+            error = "No user with this email exists."
+            return redirect(url_for("auth.accounts"))
+        elif not checkpw(password.encode("utf-8"), hashed_pass.encode("utf-8")):
+            error = "Incorrect password provided."
+            return redirect(url_for("auth.accounts"))
+        if error is None:
+            session.clear()
+            session["user_id"] = user.id 
+            return redirect(url_for("home"))  
     return redirect(url_for("accounts"))
+
+
+@auth_bp.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('auth.accounts'))
+
 
 @auth_bp.before_app_request
 def load_logged_in_user():
@@ -97,7 +81,7 @@ def login_required(page):
     @functools.wraps(page)
     def wrapper(**kwargs):
         if g.user is None:
-            return redirect(url_for("auth.sign_in"))
+            return redirect(url_for("auth.accounts"))
         return page(**kwargs)
     return wrapper
 

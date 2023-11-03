@@ -1,21 +1,21 @@
 from flask import Flask, render_template
+from auth import login_required, load_logged_in_user
 
 app = Flask(__name__)
+app.secret_key = "DEV"
 
 @app.route('/')
+@app.route('/houses')
+@login_required
 def home():	
     return render_template('Home page.html')
 
-# @app.route('/login_signup')
-# def login_signup():
-#     return render_template('/Sign in.html')
-
-# @app.route('/login', methods=['POST'])
-# def login():
-#     pass
-
 from auth import auth_bp
 app.register_blueprint(auth_bp)
+
+@app.route('/payments')
+def payments():
+    return render_template('Payments.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
