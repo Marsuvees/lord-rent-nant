@@ -6,7 +6,7 @@ app.secret_key = "DEV"
 
 @app.route('/')
 @app.route('/houses')
-@login_required
+# @login_required
 def home():	
     return render_template('Home page.html')
 
