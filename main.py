@@ -15,7 +15,7 @@ app.register_blueprint(auth_bp)
 
 @app.route('/payments')
 def payments():
-    return render_template('table-payments.html')
+    return render_template('Payments.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
