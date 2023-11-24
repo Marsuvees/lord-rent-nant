@@ -1,46 +1,29 @@
 {%extends 'base.html'%}
 
-{%block title%}Home page{%endblock%}
+{%block title%}Payments{%endblock%}
 
-{%block homepage_css%}
-	<!-- FAVICONS ICON -->
-	<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
-	<link href="./static/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
-	<link href="./static/vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
-	<link rel="stylesheet" href="./static/vendor/nouislider/nouislider.min.css">
-	
-	<!-- Style css -->
-    <link href="/static/css/style.css" rel="stylesheet">
-{%endblock%}
-
-{%block meta%}   
+{%block meta%}
     <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="keywords" content="" />
 	<meta name="author" content="" />
 	<meta name="robots" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template" />
-	<meta property="og:title" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template" />
-	<meta property="og:description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template" />
-	<meta property="og:image" content="https:/fillow.dexignlab.com/xhtml/social-image.png" />
+	<meta name="description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template" />	
 	<meta name="format-detection" content="telephone=no">
 {%endblock%}
 	
-{%block main_Homepage%}
+{%block payment_css%}	
+	<!-- FAVICONS ICON -->
+	<link rel="shortcut icon" type="image/png" href="/static/images/favicon.png" />
+    <!-- Custom Stylesheet -->
+    <link href="./static/css/perfect-scrollbar.css" rel="stylsheet">
+	<link href="./static/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+{%endblock%}
 
-    <!--*******************
-        Preloader start
-    ********************-->
-    <div id="preloader">
-		<div class="lds-ripple">
-			<div></div>
-			<div></div>
-		</div>
-    </div>
-    <!--*******************
-        Preloader end
-    ********************-->
+
+{%block main_Payments%}
 
     <!--**********************************
         Main wrapper start
@@ -58,8 +41,8 @@
 					</defs>
 				</svg>
 				<div class="brand-title">
-					<h2 class="">Fillo.</h2>
-					<span class="brand-sub-title">Dashboard</span>
+					<h2 class="">Fillow.</h2>
+					<span class="brand-sub-title">Saas Admin Dashboard</span>
 				</div>
             </a>
             <div class="nav-control">
@@ -103,7 +86,42 @@
 							<div class="card-body contacts_body p-0 dlab-scroll  " id="DLAB_W_Contacts_Body">
 								<ul class="contacts">
 									<li class="name-first-letter">A</li>
-									
+									<li class="active dlab-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/1.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon"></span>
+											</div>
+											<div class="user_info">
+												<span>Archie Parker</span>
+												<p>Kalid is online</p>
+											</div>
+										</div>
+									</li>
+									<li class="dlab-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/2.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon offline"></span>
+											</div>
+											<div class="user_info">
+												<span>Alfie Mason</span>
+												<p>Taherah left 7 mins ago</p>
+											</div>
+										</div>
+									</li>
+									<li class="dlab-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/3.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon"></span>
+											</div>
+											<div class="user_info">
+												<span>AharlieKane</span>
+												<p>Sami is online</p>
+											</div>
+										</div>
+									</li>
 									<li class="dlab-chat-user">
 										<div class="d-flex bd-highlight">
 											<div class="img_cont">
@@ -116,9 +134,31 @@
 											</div>
 										</div>
 									</li>
-
 									<li class="name-first-letter">B</li>
-									
+									<li class="dlab-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/5.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon offline"></span>
+											</div>
+											<div class="user_info">
+												<span>Bashid Samim</span>
+												<p>Rashid left 50 mins ago</p>
+											</div>
+										</div>
+									</li>
+									<li class="dlab-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/1.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon"></span>
+											</div>
+											<div class="user_info">
+												<span>Breddie Ronan</span>
+												<p>Kalid is online</p>
+											</div>
+										</div>
+									</li>
 									<li class="dlab-chat-user">
 										<div class="d-flex bd-highlight">
 											<div class="img_cont">
@@ -131,9 +171,19 @@
 											</div>
 										</div>
 									</li>
-
 									<li class="name-first-letter">D</li>
-									
+									<li class="dlab-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/3.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon"></span>
+											</div>
+											<div class="user_info">
+												<span>Darry Parker</span>
+												<p>Sami is online</p>
+											</div>
+										</div>
+									</li>
 									<li class="dlab-chat-user">
 										<div class="d-flex bd-highlight">
 											<div class="img_cont">
@@ -147,7 +197,42 @@
 										</div>
 									</li>
 									<li class="name-first-letter">J</li>
-									
+									<li class="dlab-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/5.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon offline"></span>
+											</div>
+											<div class="user_info">
+												<span>Jack Ronan</span>
+												<p>Rashid left 50 mins ago</p>
+											</div>
+										</div>
+									</li>
+									<li class="dlab-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/1.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon"></span>
+											</div>
+											<div class="user_info">
+												<span>Jacob Tucker</span>
+												<p>Kalid is online</p>
+											</div>
+										</div>
+									</li>
+									<li class="dlab-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/2.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon offline"></span>
+											</div>
+											<div class="user_info">
+												<span>James Logan</span>
+												<p>Taherah left 7 mins ago</p>
+											</div>
+										</div>
+									</li>
 									<li class="dlab-chat-user">
 										<div class="d-flex bd-highlight">
 											<div class="img_cont">
@@ -161,7 +246,18 @@
 										</div>
 									</li>
 									<li class="name-first-letter">O</li>
-									
+									<li class="dlab-chat-user">
+										<div class="d-flex bd-highlight">
+											<div class="img_cont">
+												<img src="images/avatar/4.jpg" class="rounded-circle user_img" alt=""/>
+												<span class="online_icon offline"></span>
+											</div>
+											<div class="user_info">
+												<span>Oliver Acker</span>
+												<p>Nargis left 30 mins ago</p>
+											</div>
+										</div>
+									</li>
 									<li class="dlab-chat-user">
 										<div class="d-flex bd-highlight">
 											<div class="img_cont">
@@ -174,11 +270,9 @@
 											</div>
 										</div>
 									</li>
-
 								</ul>
 							</div>
 						</div>
-						
 						<div class="card chat dlab-chat-history-box d-none">
 							<div class="card-header chat-list-header text-center">
 								<a href="javascript:void(0);" class="dlab-chat-history-back">
@@ -462,18 +556,22 @@
 		<!--**********************************
             Chat box End
         ***********************************-->
+
+
 		
-		<!--**********************************
+		
+        <!--**********************************
             Header start
         ***********************************-->
-        <div class="header border-bottom">
+        <div class="header">
             <div class="header-content">
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
 							<div class="dashboard_bar">
-                                Dashboard
+                                Payments
                             </div>
+							
                         </div>
                         <ul class="navbar-nav header-right">
 							<li class="nav-item d-flex align-items-center">
@@ -671,6 +769,7 @@
 				</nav>
 			</div>
 		</div>
+                    
         <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
@@ -743,45 +842,137 @@
         <!--**********************************
             Sidebar end
         ***********************************-->
-		
-		<!--**********************************
+        <!--**********************************
             Content body start
         ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Tenants</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Payments</a></li>
+					</ol>
+                </div>
+                <!-- row -->
 
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Recent Payments Queue</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-responsive-md">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:80px;"><strong>#</strong></th>
+                                                <th><strong>TENANT</strong></th>
+                                                <th><strong>ADDRESS</strong></th>
+                                                <th><strong>DATE</strong></th>
+                                                <th><strong>STATUS</strong></th>
+                                                <th><strong>PRICE</strong></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>01</strong></td>
+                                                <td>Mr. Bobby</td>
+                                                <td>Dr. Jackson</td>
+                                                <td>01 August 2020</td>
+                                                <td><span class="badge light badge-success">Successful</span></td>
+                                                <td>$21.56</td>
+                                                <td>
+													<div class="dropdown">
+														<button type="button" class="btn btn-success light sharp" data-bs-toggle="dropdown">
+															<svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
+														</button>
+														<div class="dropdown-menu">
+															<a class="dropdown-item" href="#">Edit</a>
+															<a class="dropdown-item" href="#">Delete</a>
+														</div>
+													</div>
+												</td>
+                                            </tr>
+											<tr>
+                                                <td><strong>02</strong></td>
+                                                <td>Mr. Bobby</td>
+                                                <td>Dr. Jackson</td>
+                                                <td>01 August 2020</td>
+                                                <td><span class="badge light badge-danger">Canceled</span></td>
+                                                <td>$21.56</td>
+                                                <td>
+													<div class="dropdown">
+														<button type="button" class="btn btn-danger light sharp" data-bs-toggle="dropdown">
+															<svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
+														</button>
+														<div class="dropdown-menu">
+															<a class="dropdown-item" href="#">Edit</a>
+															<a class="dropdown-item" href="#">Delete</a>
+														</div>
+													</div>
+												</td>
+                                            </tr>
+											<tr>
+                                                <td><strong>03</strong></td>
+                                                <td>Mr. Bobby</td>
+                                                <td>Dr. Jackson</td>
+                                                <td>01 August 2020</td>
+                                                <td><span class="badge light badge-warning">Pending</span></td>
+                                                <td>$21.56</td>
+                                                <td>
+													<div class="dropdown">
+														<button type="button" class="btn btn-warning light sharp" data-bs-toggle="dropdown">
+															<svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
+														</button>
+														<div class="dropdown-menu">
+															<a class="dropdown-item" href="#">Edit</a>
+															<a class="dropdown-item" href="#">Delete</a>
+														</div>
+													</div>
+												</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				
+                    
+                    
 
-
-
-
-
+                </div>
+            </div>
+        </div>
         <!--**********************************
             Content body end
         ***********************************-->
-		
 
 
-		
         <!--**********************************
             Footer start
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="https://dexignlab.com/" target="_blank">DexignLab</a> 2021</p>
+                <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank">iKaspien</a> 2021</p>
             </div>
         </div>
         <!--**********************************
             Footer end
         ***********************************-->
 
-		<!--**********************************
-        Support ticket button start
-        ***********************************-->
-		
         <!--**********************************
-        Support ticket button end
+           Support ticket button start
         ***********************************-->
 
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
 
-	</div>
+        
+    </div>
     <!--**********************************
         Main wrapper end
     ***********************************-->
@@ -789,27 +980,12 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <!-- Required vendors -->
+    <!-- Required static/vendors -->
     <script src="./static/vendor/global/global.min.js"></script>
-	<script src="./static/vendor/chart.js/Chart.bundle.min.js"></script>
 	<script src="./static/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-	
-	<!-- Apex Chart -->
-	<script src="./static/vendor/apexchart/apexchart.js"></script>
-	
-	<script src="./static/vendor/chart.js/Chart.bundle.min.js"></script>
-	
-	<!-- Chart piety plugin files -->
-    <script src="./static/vendor/peity/jquery.peity.min.js"></script>
-	<!-- Dashboard 1 -->
-	<script src="./static/js/dashboard/dashboard-1.js"></script>
-	
-	<script src="./static/vendor/owl-carousel/owl.carousel.js"></script>
-	
     <script src="./static/js/custom.js"></script>
 	<script src="./static/js/dlabnav-init.js"></script>
-	
-   
+    
 	<script>
 		function cardsCenter()
 		{
